@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+ 
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>Mail Classifier</title>
+
+    <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+ 
+
+    <!-- jQuery library -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <!--User prediction form with all the required css and style don't remove anything -->
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="well well-sm">
+
+                    <form class="form-horizontal" method="post" action="" id="user_form" name="user_form">
+
+                        <fieldset>
+
+                            <legend class="text-center header">Mail Ticket Classification Form</legend>
+
+ 
+
+                            <div class="form-group">
+
+                                <span class="col-md-2 col-md-offset-1 text-center"><label>Enter Mail Description</label></span>
+
+                                <div class="col-md-8">
+
+                                    <input id="User_input" name="name" type="text" placeholder="Some User input" class="form-control">
+
+                                </div>
+
+                            </div>
+
+ 
+
+                            <div class="form-group">
+
+                                <div class="col-md-12 text-center">
+
+                                    <button id="submit_button" type="submit" class="btn btn-primary btn-md">Predict</button>
+
+                                </div>
+
+                            </div>
+
+ 
+
+                            <div id="prediction_id">
+
+                                <div class="form-group">
+
+                                    <div class="col-md-2 col-md-offset-1"><label>Our Prediction</label></div>
+
+                                    <div class="col-md-4">
+
+                                        <input id="output_1" name="output_1" type="text" placeholder="Output 1" class="form-control" readonly>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <input id="output_2" name="output_2" type="text" placeholder="Output 1" class="form-control" readonly>
+
+                                    </div>
+
+                                </div>
+
+ 
+
+                                <div class="form-group">
+
+                                    <div class="col-md-2 col-md-offset-1"></div>
+
+                                    <div class="col-md-4">
+
+                                        <input id="output_3" name="output_3" type="text" placeholder="Output 2" class="form-control" readonly>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <input id="output_4" name="output_4" type="text" placeholder="Output 2" class="form-control" readonly>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+ 
+
+                        </fieldset>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+ 
+
+    <!--Writing jQuery for checking the input is not empty and displaying the ouput-->
+
+    <script type="text/javascript">
+
+ 
+
+        $(document).ready(function () {
+
+            $("#prediction_id").hide();
+
+ 
+
+            $("#submit_button").click(function (e) {
+
+               var userinput=$.trim($('#User_input').val());
+
+                if (userinput === '') {
+
+                    alert('Input can not be left blank!');
+
+                    $("#prediction_id").hide();
+
+                }
+
+                else {
+
+                    alert(' User input is '+ userinput);
+
+                    $("#prediction_id").show();
+
+                }
+
+                e.preventDefault(e);
+
+            });
+
+        });
+
+ 
+
+    </script>
+
+</body>
+
+</html>
