@@ -1,5 +1,7 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
 import pickle
 
 app = Flask(__name__)
@@ -17,27 +19,23 @@ def predict():
     '''
     For rendering results on HTML GUI
     '''
-    description = [x for x in request.form.values()]
-    final_features = preprocess(description)
+    description = [x for x in request.form.values()]    
+    description_tokens = tokenizer.texts_to_sequences(description)
+    final_features = pad_sequences(description_tokens, maxlen = 1000)    
     tkt_type = np.argmax(model_tkt.predict(final_features))
     ctg_type = np.argmax(model_ctg.predict(final_features))
     imp_type = np.argmax(model_imp.predict(final_features))
-    urg_type = np.argmax(model_urg.predict(final_features))
+    urg_type = np.argmax(model_urg.predict(final_features))    
 
-    output = round(prediction[0], 2)
-
-    return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
+    return render_template('mail_classifier.html', prediction_text=tkt_type)
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
     '''
     For direct API calls trought request
     '''
-    data = request.get_json(force=True)
-    prediction = model.predict([np.array(list(data.values()))])
-
-    output = prediction[0]
-    return jsonify(output)
+    
+    return jsonify(tkt_type)
 
 if __name__ == "__main__":
     app.run(debug=True)
