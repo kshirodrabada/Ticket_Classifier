@@ -27,7 +27,7 @@ def predict():
     imp_type = np.argmax(model_imp.predict(final_features))
     urg_type = np.argmax(model_urg.predict(final_features))    
 
-    return render_template('mail_classifier.html', prediction_text=tkt_type)
+    return render_template('Mail_Classifier.html', prediction_text=tkt_type)
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
